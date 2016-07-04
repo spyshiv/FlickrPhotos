@@ -14,7 +14,7 @@
 		<div class="row">
 			<div class="col-lg-12 tag-container">
 				<div ng-repeat="n in finaltags">
-					<span class="tags_name" onclick="filterImages('instagramapp')"> {{n}} &nbsp;</span>
+					<span class="tags_name" ng-click="filterImages(n)"> {{n}} &nbsp;</span>
 				</div>
 			</div>
 			<div class="col-lg-12 photo-container">
@@ -29,24 +29,5 @@
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript">
-		function filterImages(tag) {
-				$(".img-container").show();
-			    // select all the images
-			    var query = document.querySelectorAll('.img-container');
-			    for (var i = 0; i < query.length; i++) {
-			        var image = query[i];
-
-			        // hide the image if it doesn't contain the tag we're looking for
-			        if (image.getAttribute('data-tags').split(' ').indexOf(tag) === -1)
-			            hideImage(image);
-			    }
-			}
-
-			function hideImage(image) {
-			    // do whatever you need to "filter" out the image
-			    image.style.display = 'none';
-			}
-	</script>
 </body>
 </html>

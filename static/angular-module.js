@@ -8,7 +8,7 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
 	    	$scope.photodata = response.data.photos.photo;
 	    	var tags_set = [];
 	    	for (i=0; i<500 ; i++) {
-	    		tags_set = tags_set + $scope.photodata[i].tags;
+	    		tags_set = tags_set + " " + $scope.photodata[i].tags;
 	    		// tags_set.push($scope.selectTags($scope.photodata[i].tags));
 	    	}
 	    	
@@ -17,9 +17,6 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
 			}).join(' ');
 	    	var haha = $scope.selectTags(uniqueList);
 	    	$scope.finaltags = haha;
-	    	console.log($scope.finaltags[0]);
-	    	
-
 	    });
   	} 
   	$scope.getPhotos();	
@@ -29,6 +26,24 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
   		var tags = data.split(/\b\s+(?!$)/);
 	   	return tags;
   	}
+
+  	$scope.filterImages = function(tag) {
+  		$(".img-container").show();
+		    // select all the images
+		    var query = document.querySelectorAll('.img-container');
+		    for (var i = 0; i < query.length; i++) {
+		        var image = query[i];
+
+		        // hide the image if it doesn't contain the tag we're looking for
+		        if (image.getAttribute('data-tags').split(' ').indexOf(tag) === -1)
+		            $scope.hideImage(image);
+		    }
+  	}
+
+  	$scope.hideImage = function(image) {
+	    // do whatever you need to "filter" out the image
+	    image.style.display = 'none';
+	}
 
 
 }]);
