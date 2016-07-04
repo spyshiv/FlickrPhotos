@@ -13,9 +13,8 @@
 		<h1>Flickr Photos</h1>
 		<div class="row">
 			<div class="col-lg-12 tag-container">
-				<div class="tags">
-					<p onclick="filterImages('square')">instagram</p>
-					<br>
+				<div ng-repeat="n in finaltags">
+					<span class="tags_name" onclick="filterImages('instagramapp')"> {{n}} &nbsp;</span>
 				</div>
 			</div>
 			<div class="col-lg-12 photo-container">
@@ -32,9 +31,9 @@
 	</div>
 	<script type="text/javascript">
 		function filterImages(tag) {
+				$(".img-container").show();
 			    // select all the images
 			    var query = document.querySelectorAll('.img-container');
-
 			    for (var i = 0; i < query.length; i++) {
 			        var image = query[i];
 

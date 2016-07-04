@@ -7,13 +7,19 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
 	    .then(function(response) {
 	    	$scope.photodata = response.data.photos.photo;
 	    	var tags_set = [];
-	    	for (var i = 0; i<10; i++)
-	    	{
-	    		var tags = $scope.photodata[i].tags;
-		    	console.log(tags);
-		    	tags_set.push($scope.selectTags(tags));
+	    	for (i=0; i<500 ; i++) {
+	    		tags_set = tags_set + $scope.photodata[i].tags;
+	    		// tags_set.push($scope.selectTags($scope.photodata[i].tags));
 	    	}
-	    	console.log(tags_set);
+	    	
+	    	var uniqueList=tags_set.split(' ').filter(function(item,i,allItems){
+			    return i==allItems.indexOf(item);
+			}).join(' ');
+	    	var haha = $scope.selectTags(uniqueList);
+	    	$scope.finaltags = haha;
+	    	console.log($scope.finaltags[0]);
+	    	
+
 	    });
   	} 
   	$scope.getPhotos();	
@@ -22,7 +28,6 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
   		var data = data;
   		var tags = data.split(/\b\s+(?!$)/);
 	   	return tags;
-
   	}
 
 

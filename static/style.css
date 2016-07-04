@@ -7,6 +7,11 @@ body {
 	width: 100%;
 }
 
+.tags_name {
+	cursor: pointer;
+	float: left;
+}
+
 .photo {
 	padding:5px;
 	min-height: 200px;
