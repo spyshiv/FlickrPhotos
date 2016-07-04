@@ -1,0 +1,16 @@
+body {
+	background-color: #eee;
+}
+
+.container-fluid h1 {
+	text-align: center;
+	width: 100%;
+}
+
+.photo {
+	padding:5px;
+}
+
+.tag-container {
+	background-color: #f0f0f0;
+}
