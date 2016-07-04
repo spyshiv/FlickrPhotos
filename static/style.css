@@ -9,6 +9,11 @@ body {
 
 .photo {
 	padding:5px;
+	min-height: 200px;
+}
+
+.photo img {
+	width: 100%;
 }
 
 .tag-container {
