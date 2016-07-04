@@ -6,17 +6,16 @@ app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) 
 	  	$http.get(url)
 	    .then(function(response) {
 	    	$scope.photodata = response.data.photos.photo;
-	    	var tags_set = [];
-	    	for (i=0; i<500 ; i++) {
+	    	var tags_set = $scope.photodata[0].tags;
+	    	for (i=1; i<500 ; i++) {
 	    		tags_set = tags_set + " " + $scope.photodata[i].tags;
-	    		// tags_set.push($scope.selectTags($scope.photodata[i].tags));
 	    	}
 	    	
-	    	var uniqueList=tags_set.split(' ').filter(function(item,i,allItems){
+	    	var uniqueList = tags_set.split(' ').filter(function(item,i,allItems){
 			    return i==allItems.indexOf(item);
 			}).join(' ');
-	    	var haha = $scope.selectTags(uniqueList);
-	    	$scope.finaltags = haha;
+
+	    	$scope.finaltags = $scope.selectTags(uniqueList);
 	    });
   	} 
   	$scope.getPhotos();	
