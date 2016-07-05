@@ -22,6 +22,7 @@ app.factory('flickrRecent', ['$http', function ($http) {
 
 	svc = {
 		photos: [],
+		tags : [],
 		dataLoading: false,
 		getRecent: function () {
 			append = false;
@@ -49,6 +50,22 @@ app.factory('flickrRecent', ['$http', function ($http) {
 			totalPages = data.photos.pages;
 			svc.photos = (append) ? svc.photos.concat(data.photos.photo) : data.photos.photo;
 			svc.dataLoading = false;
+			// console.log(svc.photos);
+
+			var tags_set = svc.photos[0].tags;
+	    	for (i=1; i<svc.photos.length ; i++) {
+	    		tags_set = tags_set + " " + svc.photos[i].tags;
+	    	}
+	    	
+	    	var uniqueList = tags_set.split(' ').filter(function(item,i,allItems){
+			    return i==allItems.indexOf(item);
+			}).join(' ');
+
+	    	function selectTags (data) {
+			  	var tags = data.split(/\b\s+(?!$)/);
+				return tags;
+	    	}
+	    	svc.tags = selectTags(uniqueList);
 		}
 	};
 	return svc;

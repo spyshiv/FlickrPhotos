@@ -2,9 +2,13 @@ body {
 	background-color: #eee;
 }
 
-.container-fluid h1 {
-	text-align: center;
-	width: 100%;
+.navbar {
+	background-color: #fff;
+	height: 50px;
+}
+
+.container {
+	padding-top: 70px;
 }
 
 .tags_name {
