@@ -1,24 +1,33 @@
-var app = angular.module('Flickr', []);
+var app = angular.module('Flickr', ['lazy-scroll']);
 
-app.controller('FlickrController', ['$scope', '$http', function ($scope, $http) {
-  	$scope.getPhotos = function (){
-  		var url = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=e06443c1e6342ce6b0c4f2d0247af627&extras=owner_name%2C+date_upload%2C+tags%2C+url_sq%2C+date_taken&per_page=500&page=4&format=json&nojsoncallback=1&auth_token=72157670609489975-464a212a57b686f2&api_sig=79033250ebb7bef62a075d0eb3b0a585";
-	  	$http.get(url)
-	    .then(function(response) {
-	    	$scope.photodata = response.data.photos.photo;
-	    	var tags_set = $scope.photodata[0].tags;
-	    	for (i=1; i<500 ; i++) {
-	    		tags_set = tags_set + " " + $scope.photodata[i].tags;
-	    	}
+app.controller('FlickrController' , ['$scope', '$http', function ($scope, $http) {
+  	// $scope.getPhotos = function (){
+  	// 	var url = "https://api.flickr.com/services/rest/?method=flickr.photos.getRecent&api_key=2239153265e72bab5b40b2cdc24f2b01&extras=owner_name%2C+date_upload%2C+tags%2C+url_sq%2C+date_taken&format=json&nojsoncallback=1&auth_token=72157670017841741-f4ad78652c2724d7&api_sig=4459e038259f54413da0a8db96dc71d6";
+	  // 	$http.get(url)
+	  //   .then(function(response) {
+	  //   	$scope.photodata = response.data.photos.photo;
+	  //   	var tags_set = $scope.photodata[0].tags;
+	  //   	for (i=1; i<500 ; i++) {
+	  //   		tags_set = tags_set + " " + $scope.photodata[i].tags;
+	  //   	}
 	    	
-	    	var uniqueList = tags_set.split(' ').filter(function(item,i,allItems){
-			    return i==allItems.indexOf(item);
-			}).join(' ');
+	  //   	var uniqueList = tags_set.split(' ').filter(function(item,i,allItems){
+			//     return i==allItems.indexOf(item);
+			// }).join(' ');
 
-	    	$scope.finaltags = $scope.selectTags(uniqueList);
-	    });
-  	} 
-  	$scope.getPhotos();	
+	  //   	$scope.finaltags = $scope.selectTags(uniqueList);
+	  //   });
+  	// } 
+  	// $scope.getPhotos();	
+
+  	$scope.images = [1, 2, 3, 4, 5, 6, 7, 8];
+
+	  $scope.loadMore = function() {
+	    var last = $scope.images[$scope.images.length - 1];
+	    for(var i = 1; i <= 50; i++) {
+	      $scope.images.push(last + i);
+	    }
+	  };
 
   	$scope.selectTags = function(data) {
   		var data = data;
