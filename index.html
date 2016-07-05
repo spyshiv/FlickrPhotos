@@ -1,37 +1,40 @@
 <!DOCTYPE html>
 <html ng-app="Flickr">
 <head>
+	
 	<title>Flickr Photos</title>
-	<link rel="stylesheet" href="static/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="static/style.css">
-	<script src="static/angular.min.js"></script>
-	<script src="static/lazyscroll.js"></script>
-	<script src="static/angular-module.js"></script>
-	<script src="static/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="assets/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="assets/css/style.css">
+	
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.js"></script>
+	<script src="//ajax.googleapis.com/ajax/libs/angularjs/1.1.5/angular.js"></script>
+
+	<script src="app.js"></script>
+	<script src="controllers/main-ctrl.js"></script>
+	<script src="services/flickr-recent.js"></script>
+	<script src="directives/images.js"></script>
+	<script src="directives/infinite-scroll.js"></script>
+
 </head>
+
 <body ng-controller="FlickrController">
+	
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<ul class="nav">
+			<li ng-class="{active:queryType == 'recent'}">
+				<a href="" ng-click="updatePath('/recent')">Recent Photos</a>
+			</li>
+		</ul>
+	</nav>
+
 	<div class="container-fluid">
 		<h1>Flickr Photos</h1>
 		<div class="row">
-			<!-- <div class="col-lg-12 tag-container">
-				<div ng-repeat="n in finaltags">
-					<span class="tags_name" ng-click="filterImages(n)"> {{n}} &nbsp;</span>
-				</div>
-			</div> -->
-			<div lazy-scroll="loadMore()" lazy-scroll-trigger="80">
-				<img ng-repeat='image in images' ng-src='http://placehold.it/225x250&text={{image}}'>
-		  </div>
-			<!-- <div class="col-lg-12 photo-container" infinite-scroll='loadMore()' infinite-scroll-distance='2'>
-				<div class="img-container photo col-lg-3" ng-repeat="n in photodata"  data-tags="{{n.tags}}">
-					<div class="">
-						<img src="{{n.url_sq}}" class="responsive-img">
-						<p>User: {{n.ownername}}</p>
-						<p>Upload Date : {{n.datetaken}}</p>
-						<p>Tags : {{n.tags}}</p>
-					</div>
-				</div>
-			</div> -->
+			<div class="col-lg-12 photo-container" infinite-scroll="getMore()" infinite-scroll-threshold=100>
+				<images class="col-lg-3" ng-repeat="photo in photos"  data-tags="{{photo.tags}}"></images>
+			</div>
 		</div>
-	</div>\
+	</div>
+	
 </body>
 </html>
