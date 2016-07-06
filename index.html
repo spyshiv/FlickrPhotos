@@ -43,7 +43,13 @@
 			<div class="col-lg-3 tag-container">
 				<h3>Tags</h3>
 				<div class="tag-wrapper">
-					<tags class="tagcloud" ng-repeat="tag in tags"> </tags>
+					<div class="tagcloud" >
+						<ul>
+							<li ng-repeat="tag in tags">
+								<tags></tags>
+							</li>
+						</ul>
+					</div>
 				</div>
 			</div>
 		</div>

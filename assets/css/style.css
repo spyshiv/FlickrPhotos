@@ -109,13 +109,12 @@ body {
 	border-right-color: #555;
 }
 
-.image_with_tags {
-	text-align: center;
+.image_with_tags,
+.refresh-note {
+	background-color: #3498db;
 	font-size: 14px;
+	padding: 5px;
+	text-align: center;
 }
 
-.refresh-note {
-	text-align: center;
-	font-size: 14px;	
-}
 

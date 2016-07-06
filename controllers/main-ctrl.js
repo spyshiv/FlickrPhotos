@@ -64,8 +64,8 @@ function ($scope, flickrRecent, $location, $route, $routeParams) {
 			        if (image.getAttribute('data-tags').split(' ').indexOf(tag) === -1)
 			            $scope.hideImage(image);
 			    }
-			    $(".photo-container h3").append("<h4 class=\"image_with_tags\">Images with \"" + tag + "\" tag</h4>");
-			    $(".photo-container").append("<div class=\"clearfix\"></div><h4 class=\"refresh-note\">Please Refresh this page to see more pics or use navbar</h4>");
+			    $(".photo-container h3").append("<h4 class=\"image_with_tags\">Images with <b>\"" + tag + "\"</b> tag</h4>");
+			    $(".photo-container").append("<div class=\"clearfix\"></div><h4 class=\"refresh-note\">Please <b>Refresh</b> this page to see more pics or use navbar</h4>");
 				
 				//prevent api call while filtering with tags
 				flickrRecent.dataLoading = true;
