@@ -4,7 +4,7 @@ app.factory('flickrRecent', ['$http', function ($http) {
 		methods = {
 			'recent': 'flickr.photos.getRecent',
 		},
-		apiKey = '2239153265e72bab5b40b2cdc24f2b01',
+		apiKey = '389e360c918cdb9b05cc63694f74682c',
 		jsonCallback = 'JSON_CALLBACK',
 		extras = ["owner_name", "date_upload", "tags", "url_q", "date_taken"],
 		append = false,
@@ -38,6 +38,7 @@ app.factory('flickrRecent', ['$http', function ($http) {
 		makeApiCall: function (apiCall) {
 			if (svc.dataLoading) return;
 			svc.dataLoading = true;
+			$(".loading").show();
 			$http.jsonp(apiCall)
 				.success(svc.onLoadSuccess)
 				.error(function () {
@@ -46,11 +47,11 @@ app.factory('flickrRecent', ['$http', function ($http) {
 				});
 		},
 		onLoadSuccess: function (data) {
+			$(".loading").hide();
 			currentPage = data.photos.page;
 			totalPages = data.photos.pages;
 			svc.photos = (append) ? svc.photos.concat(data.photos.photo) : data.photos.photo;
 			svc.dataLoading = false;
-			// console.log(svc.photos);
 
 			var tags_set = svc.photos[0].tags;
 	    	for (i=1; i<svc.photos.length ; i++) {

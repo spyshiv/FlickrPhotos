@@ -1,8 +1,7 @@
 app.controller('FlickrController',
 	[
 		'$scope', 'flickrRecent', '$location', '$route', '$routeParams',
-function ($scope, flickrRecent, $location, $route, $routeParams) {
-
+function ($scope, flickrRecent, $location, $route, $routeParams) {	
 	$scope = $.extend($scope, {}, {
 		recentSearches: null,
 		init: function () {
@@ -55,6 +54,8 @@ function ($scope, flickrRecent, $location, $route, $routeParams) {
 
 		filterImages: function(tag) {
 	  		$(".img-container").show();
+	  		$(".image_with_tags").remove();
+	  		$(".refresh-note").remove();
 			    // select all the images
 			    var query = document.querySelectorAll('.img-container');
 			    for (var i = 0; i < query.length; i++) {
@@ -64,6 +65,11 @@ function ($scope, flickrRecent, $location, $route, $routeParams) {
 			        if (image.getAttribute('data-tags').split(' ').indexOf(tag) === -1)
 			            $scope.hideImage(image);
 			    }
+			    $(".photo-container h3").append("<h4 class=\"image_with_tags\">Images with \"" + tag + "\" tag</h4>");
+			    $(".photo-container").append("<div class=\"clearfix\"></div><br><h4 class=\"refresh-note\">Please Refresh this page to see more pics or use navbar</h4>");
+				
+				//prevent api call while filtering with tags
+				flickrRecent.dataLoading = true;
 	  	},
 
   		hideImage: function(image) {

@@ -14,7 +14,6 @@
 	<script src="services/flickr-recent.js"></script>
 	<script src="directives/images.js"></script>
 	<script src="directives/infinite-scroll.js"></script>
-
 </head>
 
 <body ng-controller="FlickrController">
@@ -24,7 +23,6 @@
 		    <div class="navbar-header">
 		      <a class="navbar-brand" href="/">Flickr Photos</a>
 		    </div>
-
 		    <ul class="nav navbar-nav navbar-right">
 		        <li ng-class="{active:queryType == 'recent'}">
 					<a href="" ng-click="updatePath('/recent')">Recent Images</a>
@@ -38,13 +36,17 @@
 			<div class="col-lg-9 photo-container" infinite-scroll="getMore()" infinite-scroll-threshold=100>
 				<h3>Recent Photos</h3>
 				<images class="col-lg-3 img-container" ng-repeat="photo in photos"  data-tags="{{photo.tags}}"></images>
+				<div class="col-lg-9 loading">
+					<img src="assets/images/loading.gif" class="responsive-img">
+				</div>
 			</div>
-			<div class="col-lg-3">
+			<div class="col-lg-3 tag-container">
 				<h3>Tags</h3>
-				<tags ng-repeat="tag in tags"> </tags>
+				<div class="tag-wrapper">
+					<tags class="tagcloud" ng-repeat="tag in tags"> </tags>
+				</div>
 			</div>
 		</div>
 	</div>
-
 </body>
 </html>
