@@ -57,8 +57,8 @@ app.factory('flickrRecent', ['$http', function ($http) {
 	    	for (i=1; i<svc.photos.length ; i++) {
 	    		tags_set = tags_set + " " + svc.photos[i].tags;
 	    	}
-	    	
-	    	var uniqueList = tags_set.split(' ').filter(function(item,i,allItems){
+
+	    	var uniqueList = tags_set.trim().split(' ').filter(function(item,i,allItems){
 			    return i==allItems.indexOf(item);
 			}).join(' ');
 
